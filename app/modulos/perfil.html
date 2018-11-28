@@ -1,0 +1,56 @@
+<div class="animated fadeIn">
+	<section class="row">
+		<div class="col-md-6 ">
+			<div class="card pt-3" ng-repeat="usuario in viewsDatos" >
+			  <img class="card-img-top img-size-dos rounded mx-auto d-block" src="app/img/perfil.png" alt="Card image cap">
+			  <div class="card-body">
+			    <h5 class="card-title">
+			    	{{usuario.name+' '+(usuario.second_name ? usuario.second_name:'')+' '+usuario.surname+' '+(usuario.second_surname ? usuario.second_surname:'')}}
+			    </h5>
+			    <p class="card-text">
+			    	{{usuario.ocupation}}
+			    </p>
+			  </div>
+			  <ul class="list-group list-group-flush">
+			    <li class="list-group-item">
+			    	<small class="small d-block text-info">
+			    		Numero de Id:
+			    	</small>
+			    	{{usuario.identification | number}}
+			    </li>
+			    <li class="list-group-item">
+			    	<small class="small d-block text-info">
+			    		Dirección:
+			    	</small>
+			    	{{usuario.address}}
+			    </li>
+			    <li class="list-group-item">
+			    	<small class="small d-block text-info">
+			    		Telefono:
+			    	</small>
+			    	{{usuario.phone_number}}
+			    </li>
+			    <li class="list-group-item">
+			    	<small class="small d-block text-info">
+			    		E-mail:
+			    	</small>
+			    	{{usuario.email}}
+			    </li>
+			    <li class="list-group-item">
+			    	<small class="small d-block text-info">
+			    		Ciudad:
+			    	</small>
+			    	{{usuario.municipio.name+' '+usuario.departamento.name}}
+			    </li>
+			  </ul>
+			  <!-- <div class="card-body">
+			    <a href="#" class="card-link">Card link</a>
+			    <a href="#" class="card-link">Another link</a>
+			  </div> -->
+			</div>
+		</div>
+		<aside class="col-md-6"></aside>
+	</section>
+</div>
+
+

@@ -1,0 +1,15 @@
+html{
+    text-shadow: 0 0 1px rgba(88,10,10,.2)!important;
+}
+.img-size-uno{
+	width: 3em;
+	height: 3em;
+}
+.img-size-dos{
+	width: 7em;
+	height: 7em;
+}
+.img-size-tres{
+	width: 2em;
+	height: 2em;
+}

@@ -1,0 +1,185 @@
+<div class="animated fadeIn">
+	<section class="row">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h4 >
+						<i class="fa fa-registered"></i> Registro de usuarios
+					</h4>
+				</div>
+				<div class="card-body">
+					<form novalidate name="forRegistro" class="row">
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="name">Primer nombre *</label>
+							<div class="input-group">
+								<input type="text" class="form-control " ng-class="{'is-valid': forRegistro.name.$valid}" ng-model="nuevo.name"  id="name" ng-maxlength="30" ng-minlength="3" required name="name" >
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.name.$valid, 'fa-user': !forRegistro.name.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="second_name">Segundo nombre</label>
+							<div class="input-group">
+								<input type="text" class="form-control " ng-class="{'is-valid': forRegistro.second_name.$valid}" ng-model="nuevo.second_name"  id="second_name" ng-maxlength="30" ng-minlength="3" name="second_name" >
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.second_name.$valid, 'fa-user': !forRegistro.name.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="surname">Primer apellido *</label>
+							<div class="input-group">
+								<input type="text" class="form-control " ng-class="{'is-valid': forRegistro.surname.$valid}" ng-model="nuevo.surname"  id="surname" ng-maxlength="30" ng-minlength="3" required name="surname" >
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.surname.$valid, 'fa-user': !forRegistro.surname.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="second_surname">Segundo apellido *</label>
+							<div class="input-group">
+								<input type="text" class="form-control " ng-class="{'is-valid': forRegistro.second_surname.$valid}" ng-model="nuevo.second_surname"  id="second_surname" ng-maxlength="30" ng-minlength="3" name="second_surname" >
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.second_surname.$valid, 'fa-user': !forRegistro.second_surname.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="type_identification_id">Tipo documento *</label>
+							<div class="input-group">
+
+								<select name="type_identification_id" class="form-control " ng-class="{'is-valid': forRegistro.type_identification_id.$valid}" required name="type_identification_id" ng-model="nuevo.type_identification_id" id="type_identification_id"  >
+									<option value="{{documento.id}}" ng-repeat="documento in viewsDatos.tipos_identificacion" >
+										{{documento.display_name}}
+									</option>
+								</select>
+
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.type_identification_id.$valid, 'fa-address-book': !forRegistro.type_identification_id.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="identification">Número de identificación *</label>
+							<div class="input-group">
+								<input type="text" class="form-control " ng-class="{'is-valid': forRegistro.identification.$valid}" ng-model="nuevo.identification"  id="identification" ng-maxlength="12" ng-minlength="7" required name="identification" >
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.identification.$valid, 'fa-address-card': !forRegistro.identification.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-12 form-group" >
+							<label class="form-control-label" for="address">Dirección *</label>
+							<div class="input-group">
+								<input type="text" class="form-control " ng-class="{'is-valid': forRegistro.address.$valid}" ng-model="nuevo.address"  id="address" ng-maxlength="125" ng-minlength="20" required name="address" >
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.address.$valid, 'fa-map-marker': !forRegistro.address.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="phone_number">Teléfono / celular</label>
+							<div class="input-group">
+								<input type="text" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" class="form-control " ng-class="{'is-valid': forRegistro.phone_number.$valid}" ng-model="nuevo.phone_number"  id="phone_number" ng-maxlength="12" ng-minlength="7" name="phone_number" >
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.phone_number.$valid, 'fa-phone': !forRegistro.phone_number.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="email">E-mail</label>
+							<div class="input-group">
+								<input type="email" class="form-control " ng-class="{'is-valid': forRegistro.email.$valid}" ng-model="nuevo.email"  id="email" ng-maxlength="50"  name="email" >
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.email.$valid, 'fa-envelope': !forRegistro.email.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label " for="ocupation">Ocupación</label>
+							<div class="input-group">
+								<input type="text" class="form-control " ng-class="{'is-valid': forRegistro.ocupation.$valid}" ng-model="nuevo.ocupation"  id="ocupation" ng-maxlength="100" ng-minlength="10" name="ocupation" >
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.ocupation.$valid, 'fa-briefcase': !forRegistro.ocupation.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="departamento_id">Departamento</label>
+							<div class="input-group">
+
+								<select name="departamento_id" class="form-control " ng-class="{'is-valid': forRegistro.departamento_id.$valid}" name="departamento_id" ng-model="nuevo.departamento_id" id="departamento_id"  >
+									<option value="{{departamento.id}}" ng-repeat="departamento in viewsDatos.departamentos" >
+										{{departamento.name}}
+									</option>
+								</select>
+
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.departamento_id.$valid, 'fa-map': !forRegistro.departamento_id.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+						<!-- input  -->
+						<div class="col-md-6 form-group" >
+							<label class="form-control-label" for="municipio_id">Municipios</label>
+							<div class="input-group">
+
+								<select name="municipio_id" class="form-control " ng-class="{'is-valid': forRegistro.municipio_id.$valid}" name="municipio_id" ng-model="nuevo.municipio_id" id="municipio_id"  >
+									<option value="{{municipio.id}}" ng-repeat="municipio in viewsDatos.municipios" >
+										{{municipio.name}}
+									</option>
+								</select>
+
+								<div class="input-group-prepend "> 
+									<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forRegistro.municipio_id.$valid, 'fa-map': !forRegistro.municipio_id.$valid}"  ></i> </span>
+								</div>
+							</div>
+						</div>
+						<!-- fin input -->
+
+					</form>
+				</div>
+				<div class="card-footer">
+					<button class="btn btn-primary" data-ng-disabled="!forRegistro.$valid || appDisabled" button-spinner="appDisabled" type="button" ng-click="storeFuncion(nuevo)" >
+						<i class="fa fa-paper-plane"></i> Registrar
+					</button>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

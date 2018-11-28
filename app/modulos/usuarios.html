@@ -1,0 +1,293 @@
+<div class="animated fadeIn">
+	<section class="row" ng-init="orden = false;">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h4 >
+						<i class="fa fa-users"></i> lista de usuarios
+					</h4>
+				</div>
+				<div class="card-body">
+					<div class="row pb-5">
+						<aside class="col-md-4">
+							
+							<div class="input-group">
+								<input type="search" placeholder="Filtrar usuarios" class="form-control" ng-model="filtroUno">
+								<div class="input-group-prepend "> 
+									<span class="input-group-btn bg-transparent"> 
+										<button type="button" class="btn btn-light" ng-click="orden = !orden;">
+											<i class="fa " ng-class="{'fa-chevron-down': !orden, 'fa-chevron-up': orden}" ></i>
+										</button>
+									</span>
+								</div>
+							</div>
+						</aside>
+						<aside class="col-md-8">
+							<button type="button" class="btn btn-info pull-right" ng-click="indexFuncion()"  >
+								<i class="fa fa-refresh"></i>
+							</button>
+						</aside>
+					</div>
+					<small> 
+						Total: {{viewsDatos.usuarios.length}} 
+					</small>
+					<br>
+					<div class="table-responsive">
+						<table class="table">
+						  <thead>
+						    <tr>
+						      <th scope="col">#</th>
+						      <th scope="col">nombre</th>
+						      <th scope="col">Datos</th>
+						      <th scope="col">Opciones</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr ng-repeat="usuario in viewsDatos.usuarios | orderBy:id:orden | filter:filtroUno" >
+								<th scope="row" class="animated fadeIn" > 
+								{{usuario.id}}
+								</th>
+								<td class="animated fadeIn" >
+									{{usuario.name+' '+(usuario.second_name ? usuario.second_name:'')+' '+usuario.surname+' '+(usuario.second_surname ? usuario.second_surname:'')}}
+									
+								</td>
+								<td class="animated fadeIn" >
+									<ul class="list-unstyled">
+						                <li>
+						                  <b class="text-info " >Tipo de Id:</b> {{usuario.type_identification.display_name}}
+						                </li>
+						                <li>
+						                  <b class="text-info " >Numero de Id:</b> {{usuario.identification | number}}
+						                </li>
+						                <li>
+						                  <b class="text-info " >Dirección:</b> {{usuario.address}}
+						                </li>
+						                <li>
+						                  <b class="text-info " >Telefono:</b> {{usuario.phone_number}}
+						                </li>
+						                <li>
+						                  <b class="text-info " >E-mail:</b> {{usuario.email}}
+						                </li>
+						                <li>
+						                  <b class="text-info " >Ocupación:</b> {{usuario.ocupation}}
+						                </li>
+						                <li>
+						                  <b  class="text-info " >Ciudad:</b> {{usuario.municipio.name+' '+usuario.departamento.name}}
+						                </li>
+									</ul>
+								</td>
+								<td class="animated fadeIn" >
+									<div class="btn-group">
+										<button type="button" class="btn btn-info btn-sm" data-toggle="modal"  data-target="#modal-usuarios" ng-click="edicion[0] = nuevoJson(usuario);edicion[1].index = $index" >
+											<i class="fa fa-edit"></i>
+										</button>
+										<button type="button" ng-click="deleteFuncion(usuario)" class="btn btn-danger btn-sm" >
+											<i class="fa fa-trash"></i>
+										</button>
+										<button type="button"  class="btn btn-info btn-sm" ui-sref="apiPerfil({id: {{usuario.id}} })" >
+											<i class="fa fa-eye"></i>
+										</button>
+									</div>
+								</td>
+						    </tr>
+						  </tbody>
+						</table>
+						<div class="col-md-12 " ng-if="appDisabled">
+				  			<img src="app/img/load1.gif" class="rounded mx-auto d-block img-size-uno animated fadeIn" alt="loader" />
+				  		</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+
+<div class="modal fade" id="modal-usuarios" style="display: none;">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button> -->
+          <h4 class="modal-title">Edición de usuarios</h4>
+      </div>
+      <div class="modal-body" >
+      	<form novalidate name="forEdit" class="row">
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="name">Primer nombre *</label>
+				<div class="input-group">
+					<input type="text" class="form-control " ng-class="{'is-valid': forEdit.name.$valid}" ng-model="edicion[0].name"  id="name" ng-maxlength="30" ng-minlength="3" required name="name" >
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.name.$valid, 'fa-user': !forEdit.name.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="second_name">Segundo nombre</label>
+				<div class="input-group">
+					<input type="text" class="form-control " ng-class="{'is-valid': forEdit.second_name.$valid}" ng-model="edicion[0].second_name"  id="second_name" ng-maxlength="30" ng-minlength="3" name="second_name" >
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.second_name.$valid, 'fa-user': !forEdit.name.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="surname">Primer apellido *</label>
+				<div class="input-group">
+					<input type="text" class="form-control " ng-class="{'is-valid': forEdit.surname.$valid}" ng-model="edicion[0].surname"  id="surname" ng-maxlength="30" ng-minlength="3" required name="surname" >
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.surname.$valid, 'fa-user': !forEdit.surname.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="second_surname">Segundo apellido *</label>
+				<div class="input-group">
+					<input type="text" class="form-control " ng-class="{'is-valid': forEdit.second_surname.$valid}" ng-model="edicion[0].second_surname"  id="second_surname" ng-maxlength="30" ng-minlength="3" name="second_surname" >
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.second_surname.$valid, 'fa-user': !forEdit.second_surname.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="type_identification_id">Tipo documento *</label>
+				<div class="input-group">
+
+					<select  class="form-control " ng-class="{'is-valid': forEdit.type_identification_id.$valid}" required name="type_identification_id" ng-model="edicion[0].type_identification_id" id="type_identification_id" ng-value="edicion[0].type_identification_id"  >
+						<option value="{{documento.id}}" ng-repeat="documento in viewsDatos.tipos_identificacion" >
+							{{documento.display_name}}
+						</option>
+					</select>
+
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.type_identification_id.$valid, 'fa-address-book': !forEdit.type_identification_id.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="identification">Número de identificación *</label>
+				<div class="input-group">
+					<input type="number" class="form-control " ng-class="{'is-valid': forEdit.identification.$valid}" ng-model="edicion[0].identification" id="identification" ng-maxlength="12" ng-minlength="7" required name="identification" >
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.identification.$valid, 'fa-address-card': !forEdit.identification.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-12 form-group" >
+				<label class="form-control-label" for="address">Dirección *</label>
+				<div class="input-group">
+					<input type="text" class="form-control " ng-class="{'is-valid': forEdit.address.$valid}" ng-model="edicion[0].address"  id="address" ng-maxlength="125" ng-minlength="20" required name="address" >
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.address.$valid, 'fa-map-marker': !forEdit.address.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="phone_number">Teléfono / celular</label>
+				<div class="input-group">
+					<input type="number" class="form-control " ng-class="{'is-valid': forEdit.phone_number.$valid}" ng-model="edicion[0].phone_number" string-to-number id="phone_number" ng-maxlength="12" ng-minlength="7" name="phone_number" >
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.phone_number.$valid, 'fa-phone': !forEdit.phone_number.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="email">E-mail</label>
+				<div class="input-group">
+					<input type="email" class="form-control " ng-class="{'is-valid': forEdit.email.$valid}" ng-model="edicion[0].email"  id="email" ng-maxlength="50"  name="email" >
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.email.$valid, 'fa-envelope': !forEdit.email.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="ocupation">Ocupación</label>
+				<div class="input-group">
+					<input type="text" class="form-control " ng-class="{'is-valid': forEdit.ocupation.$valid}" ng-model="edicion[0].ocupation"  id="ocupation" ng-maxlength="100" ng-minlength="10" name="ocupation" >
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.ocupation.$valid, 'fa-briefcase': !forEdit.ocupation.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="departamento_id">Departamento</label>
+				<div class="input-group">
+
+					<select class="form-control " ng-class="{'is-valid': forEdit.departamento_id.$valid}" name="departamento_id" ng-model="edicion[0].departamento_id" id="departamento_id" ng-value="edicion[0].departamento_id" >
+						<option value="{{departamento.id}}" ng-repeat="departamento in viewsDatos.departamentos" >
+							{{departamento.name}}
+						</option>
+					</select>
+
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.departamento_id.$valid, 'fa-map': !forEdit.departamento_id.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+			<!-- input  -->
+			<div class="col-md-6 form-group" >
+				<label class="form-control-label" for="municipio_id">Municipios</label>
+				<div class="input-group">
+
+					<select  class="form-control " ng-class="{'is-valid': forEdit.municipio_id.$valid}" name="municipio_id" ng-model="edicion[0].municipio_id" ng-value="edicion[0].municipio_id" id="municipio_id"  >
+						<option value="{{municipio.id}}" ng-repeat="municipio in viewsDatos.municipios" >
+							{{municipio.name}}
+						</option>
+					</select>
+
+					<div class="input-group-prepend "> 
+						<span class="input-group-text bg-transparent"> <i class="fa " ng-class="{'fa-check': forEdit.municipio_id.$valid, 'fa-map': !forEdit.municipio_id.$valid}"  ></i> </span>
+					</div>
+				</div>
+			</div>
+			<!-- fin input -->
+
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="edicion = [];" data-dismiss="modal">
+          Cerrar
+        </button>
+        <button class="btn btn-primary " data-ng-disabled="!forEdit.$valid || appDisabled" button-spinner="appDisabled"  type="button" ng-click="updateFuncion(edicion[0], edicion[1].index)" >
+			<i class="fa fa-refresh"></i> Edición
+		</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+

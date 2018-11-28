@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<base href="/base-prueba/">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<title>Pruebas</title>
+	<link rel="stylesheet" href="node_modules/angular-ui-notification/dist/angular-ui-notification.min.css">
+	<link rel="stylesheet" href="node_modules/angular-loading-bar/src/loading-bar.css">
+	<link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="node_modules/sweetalert/dist/sweetalert.css">
+	<link rel="stylesheet" href="app/css/animate.css">
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="app/css/index.css">
+	
+</head>
+<body ng-controller="appCtrl" >
+
+	<div class="list-group list-group-flush" >
+					<a class="list-group-item" ui-sref-active="active" ui-sref="apiInicio" >
+			      		Usuarios
+			  		</a>
+			  		<a class="list-group-item" ui-sref-active="active" ui-sref="apiRegistro" >
+			      		Registro
+			  		</a>
+			    </div>
+				
+	<main ui-view></main>
+
+
+<script src="node_modules/angular/angular.min.js" ></script>
+<script src="node_modules/jquery/dist/jquery.min.js" ></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="node_modules/sweetalert/dist/sweetalert.min.js" ></script>
+<script src="node_modules/systemjs/dist/system.js" ></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js" ></script>
+<script src="node_modules/angular-resource/angular-resource.min.js" ></script>
+<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js" ></script>
+<script src="node_modules/angular-ui-notification/dist/angular-ui-notification.min.js" ></script>
+<script src="node_modules/angular-loading-bar/src/loading-bar.js" ></script>
+<script src="node_modules/angular-animate/angular-animate.min.js" ></script>
+<script src="node_modules/oclazyload/dist/ocLazyLoad.min.js" ></script>
+<script src="node_modules/angular-button-spinner/dist/angular-button-spinner.min.js" ></script>
+<script src="app/js/ngSweetAlert/SweetAlert.js" ></script>
+<script src="app/main.js" ></script>
+
+<script>
+	$(document).ready(function (e) {
+		HenrylApp.onInit();
+	});
+</script>
+</body>
+</html>
